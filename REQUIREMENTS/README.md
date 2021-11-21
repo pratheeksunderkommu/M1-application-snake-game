@@ -2,7 +2,7 @@ REQUIREMENTS
 
 How does the snake game work?
 
-  The game normally starts with a dot,square,orobject on a borderedplans.As it moves forward,it leaves a trail behind,resembling a moving snake.In some games,the end of the 
+   The game normally starts with a dot,square,orobject on a borderedplans.As it moves forward,it leaves a trail behind,resembling a moving snake.In some games,the end of the 
  trail is in a fixed position,so the snake continually gets longer as it moves.
   
 What is the purpose of the Snake game?
