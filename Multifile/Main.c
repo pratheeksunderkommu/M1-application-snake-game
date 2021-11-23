@@ -1,148 +1,102 @@
-// C program to build the complete
-// snake game
-#include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <ctype.h>
+#include "user_input.h"
+#include "board.h"
+#include "snake.h"
 
-int i, j, height = 20, width = 20;
-int gameover, score;
-int x, y, fruitx, fruity, flag;
-
-// Function to generate the fruit
-// within the boundary
-void setup()
+int main(void)
 {
-	gameover = 0;
+	/* The board itself */
+	char  board[BOARD_Y][BOARD_X];
+	
+	/* Variable to store user's input */
+	char direction = '\0';
+	
+	/* Snake */
+	snake my_sn;
 
-	// Stores height and width
-	x = height / 2;
-	y = width / 2;
-label1:
-	fruitx = rand() % 20;
-	if (fruitx == 0)
-		goto label1;
-label2:
-	fruity = rand() % 20;
-	if (fruity == 0)
-		goto label2;
-	score = 0;
-}
+	/* Creates the start point, which is always in the middle */
+	my_sn = create_segment((BOARD_X % 2 == 0 ? BOARD_X / 2 : BOARD_X + 1 / 2), (BOARD_Y % 2 == 0 ? BOARD_Y / 2 : (BOARD_Y + 1) / 2));
 
-// Function to draw the boundaries
-void draw()
-{
-	system("cls");
-	for (i = 0; i < height; i++) {
-		for (j = 0; j < width; j++) {
-			if (i == 0 || i == width - 1
-				|| j == 0
-				|| j == height - 1) {
-				printf("#");
-			}
-			else {
-				if (i == x && j == y)
-					printf("0");
-				else if (i == fruitx
-						&& j == fruity)
-					printf("*");
-				else
-					printf(" ");
-			}
+	/* Clears the terminal to start the game :) */
+	system("clear");
+
+	/* Initializes board */
+	init_board(board);
+
+	/* Draws snake body into the board */
+	update_board(board, my_sn);
+
+	/* Prints the board */
+	print_board(board);
+
+	/* Enters 'special' mode of terminal */
+	entergamemode();
+
+	/* Game life */
+	while (1) {
+		
+		/* Gets input from the user */
+		get_input(&direction);
+
+		/* Checks the input, then move the snake:
+												Ate food - just prepend one block
+												Otherwise - move the snake to the direction */
+		switch (toupper(direction)) {
+
+			case('W'):
+				if(0) {		//  !!  Must create food and check if snake ate it in these if statements !!
+					my_sn = prepend_xy(my_sn, my_sn->x, my_sn->y - 1);
+				}
+				else {
+					my_sn = move_snake(my_sn, my_sn->x, my_sn->y - 1);
+				}
+				break;
+
+			case('S'):
+				if(0) {
+					my_sn = prepend_xy(my_sn, my_sn->x, my_sn->y + 1);
+				}
+				else {
+					my_sn = move_snake(my_sn, my_sn->x, my_sn->y + 1);
+				}
+				break;
+
+			case('D'):
+				if(0) {
+					my_sn = prepend_xy(my_sn, my_sn->x + 1, my_sn->y);
+				}
+				else {
+					my_sn = move_snake(my_sn, my_sn->x + 1, my_sn->y);
+				}
+				break;
+
+			case('A'):
+				if(0) {
+					my_sn = prepend_xy(my_sn, my_sn->x - 1, my_sn->y);
+				}
+				else {
+					my_sn = move_snake(my_sn, my_sn->x - 1, my_sn->y);
+				}
+				break;
 		}
-		printf("\n");
+
+		/* Clears the terminal */
+		system("clear");
+
+		/* Initializes (cleares) the board */
+		init_board(board);
+
+		/* Draws updated body to board */
+		update_board(board, my_sn);
+
+		/* Prints updated board */
+		print_board(board);
 	}
 
-	// Print the score after the
-	// game ends
-	printf("score = %d", score);
-	printf("\n");
-	printf("press X to quit the game");
-}
+	/* Exits 'special' mode of terminal */
+	endgamemode();
 
-// Function to take the input
-void input()
-{
-	if (kbhit()) {
-		switch (getch()) {
-		case 'a':
-			flag = 1;
-			break;
-		case 's':
-			flag = 2;
-			break;
-		case 'd':
-			flag = 3;
-			break;
-		case 'w':
-			flag = 4;
-			break;
-		case 'x':
-			gameover = 1;
-			break;
-		}
-	}
-}
-
-// Function for the logic behind
-// each movement
-void logic()
-{
-	sleep(0.01);
-	switch (flag) {
-	case 1:
-		y--;
-		break;
-	case 2:
-		x++;
-		break;
-	case 3:
-		y++;
-		break;
-	case 4:
-		x--;
-		break;
-	default:
-		break;
-	}
-
-	// If the game is over
-	if (x < 0 || x > height
-		|| y < 0 || y > width)
-		gameover = 1;
-
-	// If snake reaches the fruit
-	// then update the score
-	if (x == fruitx && y == fruity) {
-	label3:
-		fruitx = rand() % 20;
-		if (fruitx == 0)
-			goto label3;
-
-	// After eating the above fruit
-	// generate new fruit
-	label4:
-		fruity = rand() % 20;
-		if (fruity == 0)
-			goto label4;
-		score += 10;
-	}
-}
-
-// Driver Code
-void main()
-{
-	int m, n;
-
-	// Generate boundary
-	setup();
-
-	// Until the game is over
-	while (!gameover) {
-
-		// Function Call
-		draw();
-		input();
-		logic();
-	}
+	return 0;
 }
