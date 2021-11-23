@@ -14,3 +14,7 @@ Which algorithm is used in snake game?
 
   Scores given by these functions are aggregated by linear weighted sum, and the snake takes the action that leads to the highest score. To find a set of good weight values, we
 apply an evolutionary. 
+
+What are the features of snake game?
+
+   The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake. In some games, the end of the trail is in a fixed position, so the snake continually gets longer as it moves.
