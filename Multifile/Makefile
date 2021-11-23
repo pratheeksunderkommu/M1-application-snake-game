@@ -24,15 +24,3 @@ clean:
 
 clean_all:
 	rm -rf *o $(PROGRAM)
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
