@@ -1,1 +1,1 @@
-# MINI-PROJECT-application snake game
+# M1-application snake game
