@@ -3,21 +3,14 @@ REQUIREMENTS
 ____________
 Features
 --------
- 1. Create the board for the game
-  2. Create the Snake object (dot, square etc)
-  3. Get keystrokes from the user to move the snake around
-    * Snake will have to be control using the arrow keys
-  4. Create a object for snake to eat
-    * If the snake hits the object the snake grows
-    * Else the snake doesn't grow
-  5. Check for snake colliding to itself 
-    * End game if snake collides with itself
-    * Else continue with the game
-    * Collision detection needed
-  6. Check to see if snake has collided against the wall of board
-    * End game if snake collides with wall
-    * Else continue with the game.
-    * Collision detection needed
+The task is to implement a basic Snake Game. Below given some functionalities of this game:
+
+The snake is represented with a 0(zero) symbol.
+The fruit is represented with an *(asterisk) symbol.
+The snake can move in any direction according to the user with the help of the keyboard (W, A, S, D keys).
+When the snake eats a fruit the score will increase by 10 points.
+The fruit will generate automatically within the boundaries.
+Whenever the snake will touch the boundary the game is over.
     
 4W&1H
 ------
